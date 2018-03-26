@@ -1,8 +1,8 @@
 {
   "name": "react-drag-list-component",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "simple react component drag list",
-  "main": "public/theme/app.bundle.js",
+  "main": "dist/react-drag-list-component.js",
   "author": "Przemysław Drzewicki <przemyslaw.drzewicki@gmail.com>",
   "license": "MIT",
   "repository": {
@@ -12,8 +12,7 @@
   "scripts": {
     "start": "concurrent --kill-others \"npm run start-dev\"",
     "start-dev": "better-npm-run start-dev",
-    "build": "concurrent --kill-others \"npm run start-prod\"",
-    "start-prod": "better-npm-run start-prod",
+    "build": "babel ./src/lib/index.js > dist/react-drag-list-component.js && babel ./src/lib/utils.js > dist/utils.js && babel ./src/lib/template.js > dist/template.js",
     "test": "jest",
     "test:dev": "jest --watch",
     "test:coverage": "jest --coverage"
@@ -41,13 +40,6 @@
         "ENV": "development",
         "APP_TITLE": "React component - drag list",
         "HOST_PORT": 3101
-      }
-    },
-    "start-prod": {
-      "command": "webpack --config webpack/webpack.bulid.js",
-      "env": {
-        "ENV": "production",
-        "APP_TITLE": "React component - drag list"
       }
     }
   },
@@ -80,6 +72,7 @@
     "webpack-stream": "^3.2.0"
   },
   "dependencies": {
+    "babel-cli": "^6.26.0",
     "clean-webpack-plugin": "^0.1.13",
     "compression-webpack-plugin": "^0.4.0",
     "enzyme": "^3.3.0",
