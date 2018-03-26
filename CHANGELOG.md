@@ -23,3 +23,7 @@
 ### 1.0.6 (Mar 26, 2018)
 
 - Internal: Change export module.
+
+### 1.0.7 (Mar 26, 2018)
+
+- Internal: Add keywords to package.json

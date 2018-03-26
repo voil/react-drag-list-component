@@ -1,8 +1,9 @@
 {
   "name": "react-drag-list-component",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "simple react component drag list",
   "main": "index.js",
+  "keywords": ["react", "drag", "list", "component"],
   "author": "Przemysław Drzewicki <przemyslaw.drzewicki@gmail.com>",
   "license": "MIT",
   "repository": {
