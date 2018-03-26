@@ -25,19 +25,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _class, _temp; /*
-                    * =============================================================================
-                    * Project: drag-list-component-typescript
-                    * Created Date: 2018-03-26, 13:16:18
-                    * Author: Przemysław Drzewicki <przemyslaw.drzewicki@gmail.com>
-                    * =============================================================================
-                    * Last Modified: 2018-03-26, 14:28:03
-                    * Modified By: Przemysław Drzewicki
-                    * =============================================================================
-                    * Copyright (c) 2018 webonweb
-                    * =============================================================================
-                    */
-
+var _class, _temp;
 
 var _react = require('react');
 
@@ -57,29 +45,9 @@ var _template2 = _interopRequireDefault(_template);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/**
- * Main class of component.
- * 
- * @export
- * @class DragList
- * @extends {React.Component}
- */
 var DragList = (_temp = _class = function (_React$Component) {
   (0, _inherits3.default)(DragList, _React$Component);
 
-  /**
-   * Creates an instance of DragList.
-   * 
-   * @param {any} [props={}] 
-   * @memberof DragList
-   */
-
-
-  /**
-   * Main state of component.
-   * 
-   * @memberof DragList
-   */
   function DragList() {
     var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     (0, _classCallCheck3.default)(this, DragList);
@@ -90,13 +58,6 @@ var DragList = (_temp = _class = function (_React$Component) {
       current: null,
       target: null,
       placeholder: true
-
-      /**
-       * Prototypes for compojent.
-       * 
-       * @static
-       * @memberof DragList
-       */
     };
 
     _this.componentWillMount = function () {
@@ -170,56 +131,12 @@ var DragList = (_temp = _class = function (_React$Component) {
     return _this;
   }
 
-  /**
-   * Handle component will mount event.
-   * 
-   * @memberof DragList
-   */
-
-
-  /**
-   * Prepare list for handle drag event.
-   * 
-   * @memberof DragList
-   */
-
-
-  /**
-   * Handle mouse over event.
-   * 
-   * @param {any} [event={}] 
-   * @memberof DragList
-   */
-
-
-  /**
-   * Handle mouse down event.
-   * 
-   * @param {any} [event={}] 
-   * @memberof DragList
-   */
-
-
-  /**
-   * Handle mouse up event.
-   * 
-   * @param {any} [event={}] 
-   * @memberof DragList
-   */
-
-
-  /**
-   * Main rendering function.
-   *
-   * @memberof DragList
-   */
-
-
   return DragList;
 }(_react2.default.Component), _class.propTypes = {
   list: _propTypes2.default.array.isRequired,
   placeholder: _propTypes2.default.bool,
   update: _propTypes2.default.func.isRequired,
-  render: _propTypes2.default.func.isRequired }, _temp);
+  render: _propTypes2.default.func.isRequired
+}, _temp);
 exports.default = DragList;
 

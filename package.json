@@ -1,8 +1,8 @@
 {
   "name": "react-drag-list-component",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "simple react component drag list",
-  "main": "dist/react-drag-list-component.js",
+  "main": "index.js",
   "author": "Przemysław Drzewicki <przemyslaw.drzewicki@gmail.com>",
   "license": "MIT",
   "repository": {
@@ -12,7 +12,7 @@
   "scripts": {
     "start": "concurrent --kill-others \"npm run start-dev\"",
     "start-dev": "better-npm-run start-dev",
-    "build": "babel ./src/lib/index.js > dist/react-drag-list-component.js && babel ./src/lib/utils.js > dist/utils.js && babel ./src/lib/template.js > dist/template.js",
+    "build": "babel ./src/lib/index.js > dist/react-drag-list-component.js --no-comments && babel ./src/lib/utils.js > dist/utils.js --no-comments && babel ./src/lib/template.js > dist/template.js --no-comments && babel ./src/export.js > index.js --no-comments",
     "test": "jest",
     "test:dev": "jest --watch",
     "test:coverage": "jest --coverage"

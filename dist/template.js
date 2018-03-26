@@ -28,16 +28,5 @@ exports.default = function (component) {
       component.state.current ? component.state.current.element : null
     ) : null
   );
-}; /*
-    * =============================================================================
-    * Project: drag-list-component-typescript
-    * Created Date: 2018-03-26, 13:21:06
-    * Author: Przemysław Drzewicki <przemyslaw.drzewicki@gmail.com>
-    * =============================================================================
-    * Last Modified: 2018-03-26, 14:28:06
-    * Modified By: Przemysław Drzewicki
-    * =============================================================================
-    * Copyright (c) 2018 webonweb
-    * =============================================================================
-    */
+};
 
