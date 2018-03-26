@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DragList render component correctly 1`] = `
+<div
+  className="drag-list"
+>
+  <div
+    data-index={0}
+    key="drag-list-0"
+    onMouseDown={[Function]}
+    onMouseMove={[Function]}
+    onMouseUp={[Function]}
+  >
+    <div
+      key="0"
+    >
+      test
+    </div>
+  </div>
+  <div
+    className="drag-list-current"
+    onMouseUp={[Function]}
+    style={
+      Object {
+        "left": 0,
+        "top": 0,
+      }
+    }
+  />
+</div>
+`;
