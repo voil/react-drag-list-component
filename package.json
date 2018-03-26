@@ -2,7 +2,7 @@
   "name": "react-drag-list-component",
   "version": "1.0.0",
   "description": "simple react component drag list",
-  "main": "index.js",
+  "main": "public/theme/app.bundle.js",
   "author": "Przemysław Drzewicki <przemyslaw.drzewicki@gmail.com>",
   "license": "MIT",
   "repository": {
