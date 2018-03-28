@@ -31,3 +31,11 @@
 ### 1.0.9 (Mar 28, 2018)
 
 - Internal: Add handler element props
+
+### 1.0.10 (Mar 28, 2018)
+
+- Bugfix: fix propagation drag element event
+
+### 1.0.11 (Mar 28, 2018)
+
+- Bugfix: add build version

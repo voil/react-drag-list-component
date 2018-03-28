@@ -58,10 +58,11 @@ var DragList = (_temp = _class = function (_React$Component) {
       mainClassName: 'drag-list-element'
     };
     _this.state = {
-      current: null,
       target: null,
-      placeholder: true,
-      handler: true
+      current: null,
+      handler: true,
+      propagation: false,
+      placeholder: true
     };
 
     _this.componentWillMount = function () {
@@ -84,7 +85,7 @@ var DragList = (_temp = _class = function (_React$Component) {
           'div',
           { key: 'drag-list-' + index,
             className: _this.globals.mainClassName,
-            onMouseDown: _this.state.handler ? _this.handleMouseDown : function () {},
+            onMouseDown: !_this.state.handler ? _this.handleMouseDown : function () {},
             onMouseUp: _this.handleMouseUp,
             onMouseMove: _this.handleMouseMove,
             'data-index': index
@@ -107,42 +108,58 @@ var DragList = (_temp = _class = function (_React$Component) {
     _this.handleMouseMove = function () {
       var event = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
+      if (_this.state.propagation) {
+        var parent = event.target.parentElement;
+        if (parent.className !== _this.globals.mainClassName) {
+          return false;
+        }
+        _this.startHandleDrag(parent, event);
+      }
+
       if (!_this.state.current) {
         return false;
       }
       _this.setState({ target: event.currentTarget.dataset.index });
     };
 
-    _this.handleMouseDown = function () {
-      var event = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    _this.startHandleDrag = function () {
+      var parent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var event = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-      var parent = event.target.parentElement;
-      if (parent.className !== _this.globals.mainClassName) {
-        return false;
-      }
+      var node = _this.state.handler ? (0, _utils.nodeToString)(parent).replace('<div class="drag-list-handler"><span></span><span></span><span></span></div>', '') : (0, _utils.nodeToString)(event.target);
 
-      var node = (0, _utils.nodeToString)(parent).replace('<div class="drag-list-handler"><span></span><span></span><span></span></div>', '');
       _this.setState({
         current: {
-          index: parent.dataset.index,
+          index: _this.state.handler ? parent.dataset.index : event.currentTarget.dataset.index,
           element: _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: node } })
-        }
+        },
+        propagation: false
       });
+    };
+
+    _this.handleMouseDown = function () {
+      var event = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      return _this.setState({ propagation: true });
     };
 
     _this.handleMouseUp = function () {
       var event = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
       if (!_this.state.current) {
+        _this.clear();
         return false;
       }
       var index = event.currentTarget.dataset.index ? event.currentTarget.dataset.index : _this.state.target;
-      if (_this.state.current.index === index) {
-        _this.setState({ current: null, target: null });
+      if (_this.state.current.index === index || !index || !_this.state.current.index) {
+        _this.clear();
         return false;
       }
       _this.props.update(_this.props.list[_this.state.current.index], _this.state.current.index, index);
-      _this.setState({ current: null, target: null });
+      _this.setState({ current: null, target: null, propagation: false });
+    };
+
+    _this.clear = function () {
+      return _this.setState({ current: null, target: null, propagation: false });
     };
 
     _this.render = function () {
