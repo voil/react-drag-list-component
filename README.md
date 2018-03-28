@@ -36,6 +36,7 @@ render() {
 | placeholder | To show placeholder draged elements | false | true
 | update | Callback function after change position of element | true | ---
 | render | Callback function to render element from list | true | ---
+| handler | To show handler to draged element | false | true
 
 ### Cli-commands
 

@@ -27,3 +27,7 @@
 ### 1.0.7 (Mar 26, 2018)
 
 - Internal: Add keywords to package.json
+
+### 1.0.9 (Mar 28, 2018)
+
+- Internal: Add handler element props

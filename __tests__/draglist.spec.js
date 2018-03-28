@@ -1,10 +1,10 @@
 /*
  * =============================================================================
- * Project: drag-list-component-typescript
+ * Project: react-drag-list-component
  * Created Date: 2018-03-26, 13:33:51
  * Author: Przemysław Drzewicki <przemyslaw.drzewicki@gmail.com>
  * =============================================================================
- * Last Modified: 2018-03-26, 14:27:48
+ * Last Modified: 2018-03-28, 11:02:18
  * Modified By: Przemysław Drzewicki
  * =============================================================================
  * Copyright (c) 2018 webonweb

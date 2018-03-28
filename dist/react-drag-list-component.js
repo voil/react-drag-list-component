@@ -54,10 +54,14 @@ var DragList = (_temp = _class = function (_React$Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (DragList.__proto__ || (0, _getPrototypeOf2.default)(DragList)).call(this, props));
 
+    _this.globals = {
+      mainClassName: 'drag-list-element'
+    };
     _this.state = {
       current: null,
       target: null,
-      placeholder: true
+      placeholder: true,
+      handler: true
     };
 
     _this.componentWillMount = function () {
@@ -79,11 +83,22 @@ var DragList = (_temp = _class = function (_React$Component) {
         return _react2.default.createElement(
           'div',
           { key: 'drag-list-' + index,
-            onMouseDown: _this.handleMouseDown,
+            className: _this.globals.mainClassName,
+            onMouseDown: _this.state.handler ? _this.handleMouseDown : function () {},
             onMouseUp: _this.handleMouseUp,
             onMouseMove: _this.handleMouseMove,
             'data-index': index
           },
+          _this.state.handler ? _react2.default.createElement(
+            'div',
+            {
+              onMouseDown: _this.handleMouseDown,
+              className: 'drag-list-handler'
+            },
+            _react2.default.createElement('span', null),
+            _react2.default.createElement('span', null),
+            _react2.default.createElement('span', null)
+          ) : null,
           _this.props.render(item, index)
         );
       });
@@ -100,10 +115,17 @@ var DragList = (_temp = _class = function (_React$Component) {
 
     _this.handleMouseDown = function () {
       var event = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      return _this.setState({
+
+      var parent = event.target.parentElement;
+      if (parent.className !== _this.globals.mainClassName) {
+        return false;
+      }
+
+      var node = (0, _utils.nodeToString)(parent).replace('<div class="drag-list-handler"><span></span><span></span><span></span></div>', '');
+      _this.setState({
         current: {
-          index: event.currentTarget.dataset.index,
-          element: _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: (0, _utils.nodeToString)(event.target) } })
+          index: parent.dataset.index,
+          element: _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: node } })
         }
       });
     };
@@ -128,13 +150,15 @@ var DragList = (_temp = _class = function (_React$Component) {
     };
 
     _this.state.placeholder = _this.props.placeholder === true || _this.props.placeholder === false ? _this.props.placeholder : _this.state.placeholder;
+    _this.state.handler = _this.props.handler === true || _this.props.handler === false ? _this.props.handler : _this.state.handler;
     return _this;
   }
 
   return DragList;
 }(_react2.default.Component), _class.propTypes = {
-  list: _propTypes2.default.array.isRequired,
+  handler: _propTypes2.default.bool,
   placeholder: _propTypes2.default.bool,
+  list: _propTypes2.default.array.isRequired,
   update: _propTypes2.default.func.isRequired,
   render: _propTypes2.default.func.isRequired
 }, _temp);

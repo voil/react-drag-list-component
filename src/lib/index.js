@@ -1,10 +1,10 @@
 /*
  * =============================================================================
- * Project: drag-list-component-typescript
+ * Project: react-drag-list-component
  * Created Date: 2018-03-26, 13:16:18
  * Author: Przemysław Drzewicki <przemyslaw.drzewicki@gmail.com>
  * =============================================================================
- * Last Modified: 2018-03-26, 14:28:03
+ * Last Modified: 2018-03-28, 11:02:11
  * Modified By: Przemysław Drzewicki
  * =============================================================================
  * Copyright (c) 2018 webonweb
@@ -27,6 +27,15 @@ import template from './template';
 export default class DragList extends React.Component {
   
   /**
+   * Main globals settings.
+   * 
+   * @memberof DragList
+   */
+  globals = {
+    mainClassName: 'drag-list-element'
+  }
+
+  /**
    * Main state of component.
    * 
    * @memberof DragList
@@ -34,7 +43,8 @@ export default class DragList extends React.Component {
   state = {
     current: null,
     target: null,
-    placeholder: true
+    placeholder: true,
+    handler: true
   }
 
   /**
@@ -44,8 +54,9 @@ export default class DragList extends React.Component {
    * @memberof DragList
    */
   static propTypes  = {
-    list: PropTypes.array.isRequired,
+    handler: PropTypes.bool,
     placeholder: PropTypes.bool,
+    list: PropTypes.array.isRequired,
     update: PropTypes.func.isRequired,
     render: PropTypes.func.isRequired
   }
@@ -59,6 +70,7 @@ export default class DragList extends React.Component {
   constructor(props = {}){
     super(props);
     this.state.placeholder = this.props.placeholder === true || this.props.placeholder === false? this.props.placeholder : this.state.placeholder;
+    this.state.handler = this.props.handler === true || this.props.handler === false? this.props.handler : this.state.handler;
   }
 
   /**
@@ -86,11 +98,20 @@ export default class DragList extends React.Component {
   preapre = () => 
     this.props.list.map((item, index) => (
       <div key={`drag-list-${index}`}
-        onMouseDown={this.handleMouseDown}
+        className={this.globals.mainClassName}
+        onMouseDown={this.state.handler? this.handleMouseDown : () => {}}
         onMouseUp={this.handleMouseUp}  
         onMouseMove={this.handleMouseMove}
         data-index={index}
       >
+        {this.state.handler? <div
+          onMouseDown={this.handleMouseDown}
+          className="drag-list-handler"
+        >
+          <span />
+          <span />
+          <span />
+        </div> : null }
         {this.props.render(item, index)}
       </div>))
 
@@ -112,13 +133,18 @@ export default class DragList extends React.Component {
    * @param {any} [event={}] 
    * @memberof DragList
    */
-  handleMouseDown = (event = {}) => 
+  handleMouseDown = (event = {}) => {
+    const parent = event.target.parentElement;
+    if(parent.className !== this.globals.mainClassName) { return false; }
+    
+    const node = nodeToString(parent).replace('<div class="drag-list-handler"><span></span><span></span><span></span></div>', '');
     this.setState({
       current: {
-        index: event.currentTarget.dataset.index,
-        element: <div dangerouslySetInnerHTML={{ __html: nodeToString(event.target) }} />
+        index: parent.dataset.index,
+        element: <div dangerouslySetInnerHTML={{ __html: node }} />
       } 
     })
+  }
 
   /**
    * Handle mouse up event.
